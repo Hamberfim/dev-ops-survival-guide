@@ -1,0 +1,73 @@
+# Vagrant - Initialize a project directory
+
+01 create a directory
+02 cd into the directory
+03 Initialize the project - creates a pre-populated Vagrant file
+    # without a box specified i.e., vagrant init hashicorp/bionic64
+    terminal:
+        $ vagrant init
+
+# Install and specify a box
+# Use a reputable box (base image) and caution when using third-party published boxes
+# find more boxes at HashiCorp's Vagrant Cloud box catalog | https://vagrantcloud.com/boxes/search
+04 add a box - specify a base image that is cloned
+    terminal:
+        $ vagrant box add hashicorp/bionic64
+        # choose the provider host by its menu number
+
+        # boxes are global so if you have already initialized a box
+        # you will get an error: 
+            # The box you're attempting to add already exists. 
+            # Remove it before adding it again or add it with the `--force` flag.
+
+# Configure the use of the box 
+05 open the 'Vagrantfile' file
+    # edit the file to use the added box
+        Vagrant.configure("2") do |config|
+            config.vm.box = "hashicorp/bionic64"
+        end 
+    # only one 'end' is need in the entire file
+
+    # specify an explicit version of a box
+        Vagrant.configure("2") do |config|
+            config.vm.box = "hashicorp/bionic64"
+            config.vm.box_version = "1.0.282"
+        end
+    
+    # specify the URL to a box directly
+        Vagrant.configure("2") do |config|
+            config.vm.box = "hashicorp/bionic64"
+            config.vm.box_url = "https://vagrantcloud.com/hashicorp/bionic64"
+        end
+
+# Boot up the virtual machine environment
+06 Bring up the VM
+    terminal:
+        $ vagrant up
+        # the VM instance will take on the name of the folder and make it unique
+
+# access the machine
+07 SSH into the machine
+    terminal: 
+        $ vagrant ssh
+
+# Exit the VM
+08 logout of the vm
+    terminal:
+        $ logout  # or with CTRL+D
+
+
+# Destroy VM and Remove the box
+09 stop the vm 
+    # confirm prompts with yes
+    terminal:
+        $ vagrant destroy
+
+# Remove the resources created during the machine-creation process
+010 List and remove the box
+    terminal:
+        # list boxes
+        $ vagrant box list
+
+        # remove - vagrant box remove <box-name>
+        $ vagrant box remove hashicorp/bionic64

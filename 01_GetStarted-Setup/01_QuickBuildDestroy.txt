@@ -1,7 +1,7 @@
-We'll use Vagrant to create and configure infrastructure. 
-We'll use Ansible for configuration management
+# We'll use Vagrant to create and configure infrastructure. 
+# We'll use Ansible for configuration management
 
-
+# Installation
 01. Install VirtualBox, Ext pack and Guest-Additions
 
 02. Install Vagrant. (A Vagrant configuration file syntax is in the ruby programming language)
@@ -10,6 +10,8 @@ We'll use Ansible for configuration management
     terminal:
         $ vagrant plugin install vagrant-vbguest
 
+# Steps to Build and Destroy - Vagrant
+# Build
 04. Initial Vagrant
     terminal:
         $ vagrant init hashicorp/bionic64  # Ubuntu 18.04
@@ -26,6 +28,7 @@ We'll use Ansible for configuration management
     terminal:
         $ logout
 
+# Destroy
 07. Destroy the virtual machine
     terminal:
         $ vagrant destroy 
