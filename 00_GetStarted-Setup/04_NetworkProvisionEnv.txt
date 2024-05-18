@@ -44,7 +44,7 @@
         config.vm.provision :shell, path: "bootstrap.sh"
     end
 
-06 Deploy the webserver
+06 Deploy the web server
     terminal:
         $ vagrant up
 
