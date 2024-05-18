@@ -1,0 +1,37 @@
+# Synchronize local and guest files
+# By default, Vagrant shares your project directory 
+# (the one containing the Vagrantfile) to the 
+# /vagrant directory in your guest machine.
+
+# After having created and configured a guest machine 
+# via your Vagrantfile bring up the VM
+
+01 Bring up your VM
+    terminal:
+        $ vagrant up
+
+02 Access the VM via ssh
+    terminal:
+        $ vagrant ssh
+
+03 Explore the sync folder
+    # When you vagrant ssh into your machine,
+    # you're in /home/vagrant, 
+    # which is a different directory from the 
+    # synced /vagrant directory.
+    terminal:
+        # the Vagrantfile that you see inside the virtual machine 
+        # is the same Vagrantfile that is on your actual host machine.
+        $ ls /vagrant
+
+04 Test the sync folder
+    terminal:
+        # create a sub-directory
+        $ touch /vagrant/foo
+
+        # exit ssh session
+        $ exit
+
+        # list the contents of the local vagrant directory and
+        # see that the new directory you created on your VM 
+        # is reflected there
