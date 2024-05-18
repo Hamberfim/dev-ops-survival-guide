@@ -35,3 +35,25 @@
         # list the contents of the local vagrant directory and
         # see that the new directory you created on your VM 
         # is reflected there
+
+# Teardown options beyond destroy and remove
+
+# Suspend the machine
+# Suspending the virtual machine will stop it and 
+# save its current running state.
+     terminal:
+        $ vagrant suspend
+
+        # bring the machine back up and 
+        # its state resumes from where you left off.
+        $ vagrant up
+
+# Halt the machine
+# Halting will gracefully shut down the guest operating system 
+# and power down the guest machine
+    terminal:
+        # Halting cleanly shuts it down, preserving the contents of disk
+        $ vagrant halt
+
+        # bring the machine back up and 
+        $ vagrant up
