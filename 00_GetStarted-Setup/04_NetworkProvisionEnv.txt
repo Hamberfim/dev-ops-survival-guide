@@ -1,0 +1,80 @@
+# Networking and Provisioning Environments
+# The fundamental configurations for networking and 
+# provisioning development environments.
+
+01 init the project
+    terminal:
+        $ vagrant init hashicorp/bionic64
+
+02 create an html dir for apache to serve from
+    terminal:
+        $ mkdir html
+
+03 create an index.html page
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <h1>Get started with Vagrant!</h1>
+        </body>
+    </html>
+
+# Provisioning 
+04 Write a provisioning script
+    # Set up Apache with a shell script. 
+    # Create the following shell script and 
+    # save it as 'bootstrap.sh' in the same 
+    # directory as your Vagrantfile.
+    
+    #!/usr/bin/env bash
+    apt-get update
+    apt-get install -y apache2
+    if ! [ -L /var/www ]; then
+      rm -rf /var/www
+      ln -fs /vagrant /var/www
+    fi
+
+    # The shell script above installs Apache and 
+    # setup the default DocumentRoot of Apache to 
+    # point to your /vagrant directory, 
+    # which is the default synced folder setup by Vagrant.
+
+05 Configure Vagrant - edit Vagrantfile
+    Vagrant.configure("2") do |config|
+        config.vm.box = "hashicorp/bionic64"
+        config.vm.provision :shell, path: "bootstrap.sh"
+    end
+
+06 Deploy the webserver
+    terminal:
+        $ vagrant up
+
+07 Verify deployment
+    # ssh into the VM
+    terminal:
+        $ vagrant ssh
+
+        # get the Apache served html doc
+        $ wget -qO- 127.0.0.1
+
+# Configure the network
+08 Configure port forwarding to the guest
+    # edit the Vagrantfile and 
+    # add the config.vm.network parameter 
+    # config.vm.network :forwarded_port, guest: 80, host: 4567
+    Vagrant.configure("2") do |config|
+        config.vm.box = "hashicorp/bionic64"
+        config.vm.provision :shell, path: "bootstrap.sh"
+        config.vm.network :forwarded_port, guest: 80, host: 4567
+    end
+
+09 Reload the changes
+    terminal:
+        $ vagrant reload
+
+10 Access the served file from the guest VM locally
+    # in a browser go to:
+        http://127.0.0.1:4567/
+
+    # Vagrant also has other forms of networking, 
+    # allowing you to assign a static IP address to the guest VM, 
+    # or to bridge the guest machine onto an existing network.
